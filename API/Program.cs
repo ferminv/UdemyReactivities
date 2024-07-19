@@ -1,3 +1,4 @@
+using API;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -9,14 +10,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options =>
-     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddCors(opt => {
-    opt.AddPolicy("CorsPolicy", policy => {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
-    });
-});
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
